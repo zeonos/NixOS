@@ -11,11 +11,10 @@
     ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda1";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "Aarup1"; # Define your hostname.
+  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -30,11 +29,23 @@
   time.timeZone = "Europe/Copenhagen";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "da_DK.utf8";
+  i18n.defaultLocale = "da_DK.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "da_DK.UTF-8";
+    LC_IDENTIFICATION = "da_DK.UTF-8";
+    LC_MEASUREMENT = "da_DK.UTF-8";
+    LC_MONETARY = "da_DK.UTF-8";
+    LC_NAME = "da_DK.UTF-8";
+    LC_NUMERIC = "da_DK.UTF-8";
+    LC_PAPER = "da_DK.UTF-8";
+    LC_TELEPHONE = "da_DK.UTF-8";
+    LC_TIME = "da_DK.UTF-8";
+  };
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "da";
+    layout = "dk";
     xkbVariant = "";
   };
 
@@ -50,23 +61,31 @@
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [ pkgs.hplipWithPlugin ];
 
-  #GVFS
-  services.gvfs.enable = true;
-  
-  #Fish
-  programs.fish.enable = true;
-  users.defaultUserShell = pkgs.fish;
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
 
-  #Pipewire
-  # rtkit is optional but recommended
+  # Enable the KDE Plasma Desktop Environment.
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+
+  # Configure console keymap
+  console.keyMap = "dk-latin1";
+
+# Enable sound with pipewire.
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
-  enable = true;
-  alsa.enable = true;
-  alsa.support32Bit = true;
-  pulse.enable = true;
-  # If you want to use JACK applications, uncomment this
-  #jack.enable = true;
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
   };
 
   #Bluetooth
@@ -104,14 +123,19 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dekra = {
     isNormalUser = true;
-    description = "dekra";
-    extraGroups = [ "libvirtd" "networkmanager" "wheel" "scanner" "lp" "audio" ];
-    packages = with pkgs; [];
+    description = "DEKRA Bilsyn";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+      firefox
+    ];
   };
+
+  # Enable automatic login for the user.
+  services.xserver.displayManager.autoLogin.enable = true;
+  services.xserver.displayManager.autoLogin.user = "dekra";
 
   #Permitted insecure packages
   nixpkgs.config.permittedInsecurePackages = [
-                "electron-12.2.3"
                 "adobe-reader-9.5.5"
               ];
 
@@ -119,44 +143,18 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     adobe-reader
-    dmenu
-    emacs
-    feh
     firefox
     google-chrome
     flameshot
     ffmpeg
     git
-    gnome.simple-scan
-    htop
-    hydra-check
-    kotatogram-desktop
     libreoffice
     librewolf
-    lxappearance
-    lxde.lxmenu-data
-    lxde.lxsession
-    maim
-    meld
-    mpv
-    nomacs
     pavucontrol
-    ranger
-    ripgrep
-    rofi
-    tenacity
-    tty-clock
-    scrot
-    shared-mime-info
     shotcut
     simplescreenrecorder
-    sxiv
     system-config-printer
-    vimix-gtk-themes
-    vimix-icon-theme
     vlc
-    volctl
-    wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
