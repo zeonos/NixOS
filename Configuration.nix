@@ -42,14 +42,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  #Display server and Window Managers
-  services.xserver.enable = true;
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.windowManager.awesome.enable = true;
-  services.xserver.windowManager.dwm.enable = true;
-  services.xserver.windowManager.qtile.enable = true;
-  services.xserver.windowManager.openbox.enable = true;
-
   #Printer
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.hplip pkgs.hplipWithPlugin pkgs.samsung-unified-linux-driver pkgs.splix ];
@@ -79,14 +71,6 @@
 
   #Bluetooth
   hardware.bluetooth.enable = true;
-
-  #DWM
-  nixpkgs.overlays = [
-    (final: prev: {
-      dwm = prev.dwm.overrideAttrs (old: { src = /home/dekra/dwm ;});
-      dmenu = prev.dmenu.overrideAttrs (old: { src = /home/dekra/dmenu ;});
-    })
-  ];
 
   #Virtualisation
   #virtualisation.libvirtd.enable = true;
@@ -128,26 +112,18 @@
   #Permitted insecure packages
   nixpkgs.config.permittedInsecurePackages = [
                 "electron-12.2.3"
+                "adobe-reader-9.5.5"
               ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     adobe-reader
-    arandr
-    audacious
-    bitwarden
-    blueberry
-    bottles
-    brave
     dmenu
-    dt-shell-color-scripts
-    dwmblocks
     emacs
-    etcher
-    exa
     feh
     firefox
+    google-chrome
     flameshot
     ffmpeg
     git
@@ -174,18 +150,13 @@
     shared-mime-info
     shotcut
     simplescreenrecorder
-    starship
     sxiv
     system-config-printer
-    vim
     vimix-gtk-themes
     vimix-icon-theme
-    virt-manager
     vlc
     volctl
     wget
-    xorg.xkill
-    zeroad
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
