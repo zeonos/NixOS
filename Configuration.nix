@@ -12,7 +12,7 @@
 
   # Bootloader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.device = "/dev/sda1";
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "Aarup1"; # Define your hostname.
