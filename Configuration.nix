@@ -101,25 +101,6 @@
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   xdg.portal.enable = true;
 
-  #Picom
-  services.picom.enable = true;
-  services.picom.fade = true;
-  services.picom.activeOpacity = 0.9;
-  services.picom.inactiveOpacity = 0.7;
-  services.picom.menuOpacity = 0.9;
-  services.picom.opacityRules = [
-                     "100:class_g = 'mpv'"
-                     "100:class_g = 'librewolf'"
-                     "100:class_g = 'Virt-manager'"
-                     "100:class_g = 'pyrogenesis'"
-                     "100:class_g = 'kdenlive'"
-                     "100:class_g = '0ad'"
-                     "100:class_g = 'Gimp'"
-                     "100:class_g = 'qutebrowser'"
-                     "100:class_g = 'vlc'"
-                     "100:class_g = 'Brave-browser'"
-  ];
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dekra = {
     isNormalUser = true;
