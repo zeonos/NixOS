@@ -151,41 +151,42 @@
     enable = true;
     extensions = [
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
-      "oboonakemofpalcgghocfoadofidjkkk" # KeePassXC-Browser
     ];
     extraOpts = {
     "BrowserSignin" = 0;
     "BookmarkBarEnabled" = true;
     "SyncDisabled" = true;
+    "HomepageIsNewTabPage" = true;
     "PasswordManagerEnabled" = false;
+    "HomepageLocation" = "http://bilsyn.dekra.nu"
     "SpellcheckEnabled" = true;
     "SpellcheckLanguage" = [
                              "da-DK"
                            ];
     "ManagedBookmarks" = [
      {
-      "toplevel_name" = "My managed bookmarks folder"
+      "toplevel_name": "My managed bookmarks folder"
      },
      {
-      "name" = "Google",
-      "url" = "google.com"
+      "name": "Google",
+      "url": "google.com"
      },
      {
-      "name" = "Youtube",
-      "url" = "youtube.com"
+      "name": "Youtube",
+      "url": "youtube.com"
      },
      {
-      "children" = [
+      "children": [
        {
-        "name" = "Chromium",
-        "url" = "chromium.org"
+        "name": "Chromium",
+        "url": "chromium.org"
        },
        {
-        "name" = "Chromium Developers",
-        "url" = "dev.chromium.org"
+        "name": "Chromium Developers",
+        "url": "dev.chromium.org"
        }
       ],
-      "name" = "Chrome links"
+      "name": "Chrome links"
      }
     ]
     };
