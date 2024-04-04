@@ -146,6 +146,28 @@
   #   enableSSHSupport = true;
   # };
 
+  # Extra chrome policies
+  programs.chromium = {
+    enable = true;
+    extensions = [
+      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
+      "oboonakemofpalcgghocfoadofidjkkk" # KeePassXC-Browser
+    ];
+    extraOpts = {
+      "BrowserSignin" = 0;
+      "SyncDisabled" = true;
+      "PasswordManagerEnabled" = true;
+      "BuiltInDnsClientEnabled" = false;
+      "MetricsReportingEnabled" = true;
+      "SpellcheckEnabled" = true;
+      "BookmarkBarEnabled" = true,
+      "SpellcheckLanguage" = [
+                               "da-DK"
+                             ];
+      "CloudPrintSubmitEnabled" = false;
+    };
+  };
+
   # aist services that you want to enable:
 
   # Enable the OpenSSH daemon.
