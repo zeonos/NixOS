@@ -154,17 +154,14 @@
       "oboonakemofpalcgghocfoadofidjkkk" # KeePassXC-Browser
     ];
     extraOpts = {
-      "BrowserSignin" = 0;
-      "SyncDisabled" = true;
-      "PasswordManagerEnabled" = true;
-      "BuiltInDnsClientEnabled" = false;
-      "MetricsReportingEnabled" = true;
-      "SpellcheckEnabled" = true;
-      "BookmarkBarEnabled" = true,
-      "SpellcheckLanguage" = [
-                               "da-DK"
-                             ];
-      "CloudPrintSubmitEnabled" = false;
+    "BrowserSignin" = 0;
+    "BookmarkBarEnabled" = true;
+    "SyncDisabled" = true;
+    "PasswordManagerEnabled" = false;
+    "SpellcheckEnabled" = true;
+    "SpellcheckLanguage" = [
+                             "da-DK"
+                           ];
     };
   };
 
