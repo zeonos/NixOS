@@ -162,6 +162,32 @@
     "SpellcheckLanguage" = [
                              "da-DK"
                            ];
+    "ManagedBookmarks" = [
+     {
+      "toplevel_name" = "My managed bookmarks folder"
+     },
+     {
+      "name" = "Google",
+      "url" = "google.com"
+     },
+     {
+      "name" = "Youtube",
+      "url" = "youtube.com"
+     },
+     {
+      "children" = [
+       {
+        "name" = "Chromium",
+        "url" = "chromium.org"
+       },
+       {
+        "name" = "Chromium Developers",
+        "url" = "dev.chromium.org"
+       }
+      ],
+      "name" = "Chrome links"
+     }
+    ]
     };
   };
 
