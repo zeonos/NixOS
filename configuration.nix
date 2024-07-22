@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./firefox.nix
     ];
 
   # Bootloader.
@@ -16,11 +15,14 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.wireless = {
+    enable = true;
+    networks."ducas".psk = "5555555555";
+    extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
+    # output ends up in /run/wpa_supplicant/wpa_supplicant.conf
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -125,13 +127,13 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     adobe-reader
-    firefox
     google-chrome
+    chromium
     flameshot
     ffmpeg
     git
     libreoffice
-    librewolf
+    wget
     pavucontrol
     shotcut
     simplescreenrecorder
@@ -159,8 +161,8 @@
     "SyncDisabled" = true;
     "HomepageIsNewTabPage" = true;
     "PasswordManagerEnabled" = false;
-    "RestoreOnStartupURLs" = "http://bilsyn.dekra.nu";
-    "HomepageLocation" = "http://bilsyn.dekra.nu";
+    "RestoreOnStartupURLs" = "https://bilsyn.dekra.nu";
+    "HomepageLocation" = "https://bilsyn.dekra.nu";
     "SpellcheckEnabled" = true;
     "SpellcheckLanguage" = [
                              "da-DK"
@@ -231,6 +233,11 @@
     };
   };
 
+  # Stop system from sleeping
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
 
 
 
